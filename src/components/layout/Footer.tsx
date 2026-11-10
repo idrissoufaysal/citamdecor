@@ -1,167 +1,108 @@
-import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+
+const NAVIGATION = [
+  { label: "Accueil", href: "#accueil" },
+  { label: "À propos", href: "#a-propos" },
+  { label: "Services", href: "#services" },
+  { label: "Réalisations", href: "#realisations" },
+  { label: "Contact", href: "#contact" },
+];
+
+const EXPERTISES = [
+  { label: "Tapisserie d'ameublement", href: "#services" },
+  { label: "Rideaux & voilages", href: "#services" },
+  { label: "Décoration intérieure", href: "#services" },
+  { label: "Sellerie automobile", href: "#services" },
+];
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-primary-container text-surface-container-high pt-16 sm:pt-20 pb-12 border-t border-outline-variant/20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Brand Presentation */}
-          <div className="lg:col-span-4 flex flex-col">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded bg-surface flex items-center justify-center text-primary font-serif font-bold text-lg">
-                C
-              </div>
-              <span className="font-headline-sm text-xl text-surface-container-lowest font-medium tracking-tight">
+    <footer className="border-t border-hairline bg-background">
+      <div className="shell py-16 sm:py-20">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+          {/* Marque */}
+          <div className="lg:col-span-4">
+            <div className="flex items-center gap-3">
+              <span aria-hidden="true" className="text-lg text-accent">
+                ◆
+              </span>
+              <span className="text-lg font-medium tracking-tight">
                 C.I.TA.M DÉCOR
               </span>
             </div>
-            <p className="font-body-sm text-sm text-outline-variant max-w-sm mb-2 leading-relaxed font-semibold">
-              Centre International de Tapisserie Moderne - Décoration
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Centre International de Tapisserie Moderne — Décoration. Un atelier
+              d&apos;artisanat d&apos;exception à Lomé : tapisserie, draperies,
+              architecture textile et sellerie automobile.
             </p>
-            <p className="font-body-sm text-sm text-outline-variant/80 max-w-sm mb-6 leading-relaxed">
-              Atelier d&apos;artisanat de luxe à Lomé. Confection haute couture de salons, draperies raffinées, architecture textile et habillage sellier automobile de prestige.
-            </p>
-            <div className="flex items-center gap-2 text-secondary-fixed font-label-sm text-xs uppercase tracking-widest">
-              <span className="material-symbols-outlined text-[16px]">verified</span>
-              <span>Excellence &amp; Précision Artisanale</span>
-            </div>
+            <a
+              href="#contact"
+              className="mt-6 inline-flex min-h-6 items-center gap-2 text-sm text-foreground transition-colors hover:text-accent"
+            >
+              Prendre contact
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
           </div>
 
           {/* Navigation */}
-          <div className="lg:col-span-2 flex flex-col">
-            <h4 className="font-label-lg text-xs uppercase tracking-widest text-surface-container-lowest mb-4">
-              Navigation
-            </h4>
-            <ul className="flex flex-col gap-2.5 font-body-sm text-sm text-outline-variant">
-              <li>
-                <Link className="hover:text-secondary-fixed transition-colors" href="/">
-                  Accueil
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-secondary-fixed transition-colors" href="/#a-propos">
-                  À propos
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-secondary-fixed transition-colors" href="/services">
-                  Nos services
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-secondary-fixed transition-colors" href="/#realisations">
-                  Réalisations
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-secondary-fixed transition-colors" href="/contact">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link className="hover:text-secondary-fixed transition-colors" href="/contact">
-                  Demande de devis
-                </Link>
-              </li>
+          <nav aria-label="Navigation" className="lg:col-span-2">
+            <h2 className="eyebrow">Navigation</h2>
+            <ul className="mt-5 flex flex-col gap-3 text-sm leading-6 text-muted-foreground">
+              {NAVIGATION.map((link) => (
+                <li key={link.label}>
+                  <a
+                    className="transition-colors hover:text-foreground"
+                    href={link.href}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Expertises */}
-          <div className="lg:col-span-3 flex flex-col">
-            <h4 className="font-label-lg text-xs uppercase tracking-widest text-surface-container-lowest mb-4">
-              Expertises &amp; Savoir-Faire
-            </h4>
-            <ul className="flex flex-col gap-3 font-body-sm text-sm text-outline-variant">
-              <li>
-                <Link
-                  className="hover:text-secondary-fixed transition-colors flex items-center justify-between group"
-                  href="/services#ameublement"
-                >
-                  <span>Tapisserie d&apos;Ameublement</span>
-                  <span className="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">
-                    arrow_forward
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-secondary-fixed transition-colors flex items-center justify-between group"
-                  href="/services#draperies"
-                >
-                  <span>Rideaux Sur Mesure &amp; Voilages</span>
-                  <span className="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">
-                    arrow_forward
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-secondary-fixed transition-colors flex items-center justify-between group"
-                  href="/services#amenagement"
-                >
-                  <span>Décoration Intérieure</span>
-                  <span className="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">
-                    arrow_forward
-                  </span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-secondary-fixed transition-colors flex items-center justify-between group"
-                  href="/services#automobile"
-                >
-                  <span>Tapisserie &amp; Sellerie Auto</span>
-                  <span className="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 transition-opacity">
-                    arrow_forward
-                  </span>
-                </Link>
-              </li>
+          <nav aria-label="Expertises" className="lg:col-span-3">
+            <h2 className="eyebrow">Expertises</h2>
+            <ul className="mt-5 flex flex-col gap-3 text-sm leading-6 text-muted-foreground">
+              {EXPERTISES.map((link) => (
+                <li key={link.label}>
+                  <a
+                    className="transition-colors hover:text-foreground"
+                    href={link.href}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Atelier & Contact */}
-          <div className="lg:col-span-3 flex flex-col">
-            <h4 className="font-label-lg text-xs uppercase tracking-widest text-surface-container-lowest mb-4">
-              Atelier &amp; Contact
-            </h4>
-            <div className="flex flex-col gap-3.5 font-body-sm text-sm text-outline-variant">
-              <div className="flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-[18px] text-secondary-fixed shrink-0 mt-0.5">
-                  location_on
-                </span>
-                <span>Agbalépédo, non loin de la station NAGODÉ, Lomé — Togo</span>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-[18px] text-secondary-fixed shrink-0 mt-0.5">
-                  phone_in_talk
-                </span>
-                <div className="flex flex-col">
-                  <a className="hover:text-secondary-fixed transition-colors" href="tel:+22870377743">
-                    +228 70 37 77 43
-                  </a>
-                  <a className="hover:text-secondary-fixed transition-colors" href="tel:+22879202601">
-                    +228 79 20 26 01
-                  </a>
-                </div>
-              </div>
-              <div className="flex items-start gap-2.5">
-                <span className="material-symbols-outlined text-[18px] text-secondary-fixed shrink-0 mt-0.5">
-                  schedule
-                </span>
-                <span>Lundi — Samedi : 08h00 — 18h30</span>
-              </div>
-            </div>
+          {/* Atelier */}
+          <div className="lg:col-span-3">
+            <h2 className="eyebrow">Atelier</h2>
+            <address className="mt-5 flex flex-col gap-3 text-sm leading-6 not-italic text-muted-foreground">
+              <span>Agbalépédo, non loin de la station NAGODÉ, Lomé — Togo</span>
+              <a
+                className="transition-colors hover:text-foreground"
+                href="tel:+22870377743"
+              >
+                +228 70 37 77 43
+              </a>
+              <a
+                className="transition-colors hover:text-foreground"
+                href="tel:+22879202601"
+              >
+                +228 79 20 26 01
+              </a>
+              <span>Lundi — Samedi : 08h00 — 18h30</span>
+            </address>
           </div>
         </div>
 
-        {/* Bottom copyright */}
-        <div className="mt-12 pt-6 border-t border-outline-variant/15 flex flex-col md:flex-row items-center justify-between gap-4 font-label-sm text-xs text-outline-variant/70">
+        <div className="mt-14 flex flex-col gap-3 border-t border-hairline pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 C.I.TA.M DÉCOR. Tous droits réservés.</p>
-          <div className="flex items-center gap-6 font-body-sm text-xs">
-            <span className="text-outline-variant/60">
-              Atelier Haute Tapisserie • Lomé, République Togolaise
-            </span>
-          </div>
+          <p>Atelier de haute tapisserie • Lomé, République Togolaise</p>
         </div>
       </div>
     </footer>

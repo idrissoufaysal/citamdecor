@@ -1,172 +1,295 @@
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * ============================================================
+ *  Design system « Powerful » — voir design.md
+ * ============================================================
+ *  Fond quasi-noir, texte crème, une seule couleur chaude.
+ *  Typographie néo-grotesque (Inter), un seul mot géant.
+ * ============================================================
+ */
 @theme {
-  --color-primary: #120e0a;
-  --color-primary-container: #28231f;
-  --color-on-primary: #ffffff;
-  --color-on-primary-container: #928a84;
-  --color-primary-fixed: #ebe1da;
-  --color-primary-fixed-dim: #cec5be;
-  --color-on-primary-fixed: #1f1b17;
-  --color-on-primary-fixed-variant: #4c4641;
+  /* — Palette — */
+  --color-background: #0f1112;
+  --color-surface: #1a1c1d;
+  --color-surface-2: #242628;
+  --color-foreground: #e8e0d5;
+  --color-muted-foreground: #b5ada3;
+  --color-accent: #a57a4c;
 
-  --color-secondary: #7c5730;
-  --color-secondary-container: #fdcb9b;
-  --color-secondary-fixed: #ffdcbd;
-  --color-secondary-fixed-dim: #eebd8e;
-  --color-on-secondary: #ffffff;
-  --color-on-secondary-container: #79542d;
-  --color-on-secondary-fixed: #2c1600;
-  --color-on-secondary-fixed-variant: #61401b;
+  /* Traits fins (cartes, séparateurs) */
+  --color-hairline: rgba(232, 224, 213, 0.14);
+  /* Bordure des boutons outline (design.md) */
+  --color-border: rgba(232, 224, 213, 0.5);
 
-  --color-tertiary: #160d00;
-  --color-tertiary-container: #2d230d;
-  --color-tertiary-fixed: #f3e0be;
-  --color-tertiary-fixed-dim: #d6c4a3;
-  --color-on-tertiary: #ffffff;
-  --color-on-tertiary-container: #99896c;
-  --color-on-tertiary-fixed: #231a05;
-  --color-on-tertiary-fixed-variant: #51452c;
+  /* — Alias shadcn/ui — */
+  --color-primary: #e8e0d5;
+  --color-primary-foreground: #0f1112;
+  --color-secondary: #242628;
+  --color-secondary-foreground: #e8e0d5;
+  --color-muted: #1a1c1d;
+  --color-muted-foreground: #b5ada3;
+  --color-accent-foreground: #0f1112;
+  --color-card: #1a1c1d;
+  --color-card-foreground: #e8e0d5;
+  --color-popover: #1a1c1d;
+  --color-popover-foreground: #e8e0d5;
+  --color-input: rgba(232, 224, 213, 0.2);
+  --color-ring: #a57a4c;
+  --color-destructive: #c05a4c;
+  --color-destructive-foreground: #e8e0d5;
 
-  --color-background: #fdf9f1;
-  --color-on-background: #1c1c17;
+  /* — Typographie — */
+  --font-sans: var(--font-inter), "Helvetica Neue", Helvetica, system-ui, sans-serif;
 
-  --color-surface: #fdf9f1;
-  --color-surface-dim: #dddad2;
-  --color-surface-bright: #fdf9f1;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f7f3eb;
-  --color-surface-container: #f1ede5;
-  --color-surface-container-high: #ece8e0;
-  --color-surface-container-highest: #e6e2da;
-  --color-surface-variant: #e6e2da;
-  --color-surface-tint: #645d58;
-  --color-on-surface: #1c1c17;
-  --color-on-surface-variant: #4d4540;
+  /* — Rayons — */
+  --radius: 1.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
 
-  --color-outline: #7e756f;
-  --color-outline-variant: #d0c4bd;
-
-  --color-inverse-surface: #31302b;
-  --color-inverse-on-surface: #f4f0e8;
-  --color-inverse-primary: #cec5be;
-
-  --font-serif: var(--font-playfair), serif;
-  --font-sans: var(--font-manrope), sans-serif;
-  --font-display: var(--font-playfair), serif;
-  --font-body: var(--font-manrope), sans-serif;
-
-  --spacing-space-xs: 0.375rem;
-  --spacing-space-sm: 0.75rem;
-  --spacing-space-md: 1.25rem;
-  --spacing-space-lg: 2rem;
-  --spacing-space-xl: 3.5rem;
-  --spacing-space-2xl: 5.5rem;
-  --spacing-margin-mobile: 1.25rem;
-  --spacing-margin-tablet: 2.5rem;
-  --spacing-margin: 4rem;
-  --spacing-gutter: 2rem;
-  --spacing-gutter-mobile: 1rem;
+  /* — Espacements (base 8 px) — */
+  --spacing-space-1: 0.5rem;
+  --spacing-space-2: 1rem;
+  --spacing-space-3: 1.5rem;
+  --spacing-space-4: 2rem;
+  --spacing-space-8: 4rem;
 }
 
-@layer utilities {
-  .font-display-xl {
-    font-family: var(--font-playfair), serif;
-    font-size: clamp(2.75rem, 5vw, 4.5rem);
+@layer base {
+  * {
+    @apply border-hairline;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  blockquote {
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-background);
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :where(a, button):focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+
+  /* Keep anchored sections clear of the fixed header */
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@layer components {
+  /* Conteneur : marges latérales ~150 px en desktop */
+  .shell {
+    width: 100%;
+    max-width: 1680px;
+    margin-inline: auto;
+    padding-inline: 20px;
+  }
+
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 40px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .shell {
+      padding-inline: clamp(48px, 10vw, 150px);
+    }
+  }
+
+  .measure {
+    max-width: 1000px;
+  }
+
+  /* — Échelle typographique — */
+  .hero-title {
+    font-size: clamp(120px, 18vw, 240px);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+
+  @media (max-width: 640px) {
+    .hero-title {
+      font-size: clamp(72px, 20vw, 120px);
+    }
+  }
+
+  .display {
+    font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+  }
+
+  .heading {
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
     line-height: 1.1;
+  }
+
+  .card-title {
+    font-size: clamp(1.25rem, 1.8vw, 1.625rem);
+    font-weight: 400;
     letter-spacing: -0.02em;
-  }
-  .font-display-lg {
-    font-family: var(--font-playfair), serif;
-    font-size: clamp(2.25rem, 4vw, 3.5rem);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-  }
-  .font-headline-lg {
-    font-family: var(--font-playfair), serif;
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
     line-height: 1.2;
-    letter-spacing: -0.01em;
   }
-  .font-headline-md {
-    font-family: var(--font-playfair), serif;
-    font-size: 2rem;
-    line-height: 2.5rem;
+
+  .body-lg {
+    font-size: clamp(1.125rem, 2vw, 1.75rem);
+    line-height: 1.35;
+    font-weight: 400;
   }
-  .font-headline-sm {
-    font-family: var(--font-playfair), serif;
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-  .font-title-lg {
-    font-family: var(--font-manrope), sans-serif;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    letter-spacing: -0.01em;
-  }
-  .font-title-md {
-    font-family: var(--font-manrope), sans-serif;
-    font-size: 1.125rem;
-    line-height: 1.6rem;
-  }
-  .font-body-lg {
-    font-family: var(--font-manrope), sans-serif;
-    font-size: 1.125rem;
-    line-height: 1.85rem;
-  }
-  .font-body-md {
-    font-family: var(--font-manrope), sans-serif;
-    font-size: 1rem;
-    line-height: 1.65rem;
-  }
-  .font-body-sm {
-    font-family: var(--font-manrope), sans-serif;
-    font-size: 0.875rem;
-    line-height: 1.45rem;
-  }
-  .font-label-lg {
-    font-family: var(--font-manrope), sans-serif;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.08em;
-  }
-  .font-label-md {
-    font-family: var(--font-manrope), sans-serif;
+
+  .eyebrow {
     font-size: 0.75rem;
-    line-height: 1rem;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-muted-foreground);
   }
-  .font-label-sm {
-    font-family: var(--font-manrope), sans-serif;
-    font-size: 0.6875rem;
-    line-height: 0.9rem;
-    letter-spacing: 0.14em;
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    font-size: 1.125rem;
+    line-height: 1;
+    color: var(--color-muted-foreground);
+    transition: color 200ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-foreground);
+  }
+
+  /* — Boutons pilule — */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    padding: 14px 28px;
+    font-size: 1.125rem;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease,
+      color 200ms ease,
+      transform 200ms ease;
+  }
+
+  .btn:active {
+    transform: translateY(1px);
+  }
+
+  .btn-outline {
+    border-color: var(--color-border);
+    color: var(--color-foreground);
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    background: rgba(232, 224, 213, 0.08);
+    border-color: var(--color-foreground);
+  }
+
+  .btn-solid {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .btn-solid:hover {
+    background: var(--color-accent);
+    color: var(--color-foreground);
+  }
+
+  .btn-accent {
+    background: var(--color-accent);
+    color: var(--color-foreground);
+  }
+
+  .btn-accent:hover {
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  /* — Effets — */
+  .fade-bottom {
+    background: linear-gradient(
+      to top,
+      var(--color-background) 0%,
+      rgba(15, 17, 18, 0.6) 45%,
+      transparent 100%
+    );
+  }
+
+  .img-fade {
+    -webkit-mask-image: linear-gradient(
+      to top,
+      #000 0%,
+      rgba(0, 0, 0, 0.7) 55%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to top,
+      #000 0%,
+      rgba(0, 0, 0, 0.7) 55%,
+      transparent 100%
+    );
   }
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #fdf9f1;
-  color: #1c1c17;
-  font-family: var(--font-manrope), sans-serif;
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-/* Material symbols font icon styling */
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

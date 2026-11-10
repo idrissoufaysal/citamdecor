@@ -1,147 +1,111 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+
+const NAV_LINKS = [
+  { label: "Accueil", href: "#accueil" },
+  { label: "À propos", href: "#a-propos" },
+  { label: "Services", href: "#services" },
+  { label: "Réalisations", href: "#realisations" },
+  { label: "Contact", href: "#contact" },
+];
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const navLinks = [
-    { label: "Accueil", href: "/" },
-    { label: "À propos", href: "/#a-propos" },
-    { label: "Nos services", href: "/services" },
-    { label: "Réalisations", href: "/#realisations" },
-    { label: "Contact & Devis", href: "/contact" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(40,35,31,0.06)] border-b border-outline-variant/30">
-      {/* Top Bar - Contact & Location */}
-      <div className="bg-primary-container text-surface-container-high py-1.5 px-4 sm:px-8 lg:px-16 text-xs">
-        <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 text-center sm:text-left">
-          <div className="flex items-center gap-2 font-label-sm text-label-sm tracking-widest text-outline-variant">
-            <span className="material-symbols-outlined text-[14px] text-secondary-fixed">
-              location_on
-            </span>
-            <span>Lomé, Togo • Agbalépédo, près de la station NAGODÉ</span>
-          </div>
-          <div className="flex items-center gap-4 font-label-sm text-label-sm text-outline-variant tracking-wider">
-            <a
-              className="hover:text-surface-container-lowest transition-colors flex items-center gap-1.5"
-              href="tel:+22870377743"
-            >
-              <span className="material-symbols-outlined text-[13px] text-secondary-fixed">
-                call
-              </span>
-              <span>+228 70 37 77 43</span>
-            </a>
-            <span className="opacity-40">|</span>
-            <a
-              className="hover:text-surface-container-lowest transition-colors"
-              href="tel:+22879202601"
-            >
-              +228 79 20 26 01
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navbar */}
-      <div className="h-20 max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 flex items-center justify-between gap-4">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded bg-primary flex items-center justify-center text-surface shadow-sm group-hover:bg-secondary transition-colors">
-            <span className="font-serif text-xl font-bold tracking-tighter">C</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-headline-sm text-lg sm:text-xl font-semibold tracking-tight text-primary leading-none group-hover:text-secondary transition-colors">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "border-b border-hairline bg-background/85 py-3 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent py-5 sm:py-6"
+      }`}
+    >
+      <div className="shell flex items-center justify-between gap-4">
+        {/* Marque */}
+        <a href="#accueil" className="group flex shrink-0 items-center gap-3">
+          <span
+            aria-hidden="true"
+            className="text-lg leading-none text-foreground transition-colors group-hover:text-accent"
+          >
+            ◆
+          </span>
+          <span className="flex flex-col">
+            <span className="text-base font-medium tracking-tight text-foreground sm:text-lg">
               C.I.TA.M DÉCOR
             </span>
-            <span className="font-label-sm text-[9px] text-on-surface-variant uppercase tracking-widest mt-1">
-              Atelier Lomé • Tapisserie Moderne
+            <span className="mt-0.5 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+              Atelier d&apos;art • Lomé
             </span>
-          </div>
-        </Link>
+          </span>
+        </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) => {
-            const isActive =
-              pathname === link.href ||
-              (link.href !== "/" && pathname.startsWith(link.href));
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`px-3.5 py-2 font-label-lg text-label-lg uppercase tracking-wider transition-all rounded-lg ${
-                  isActive
-                    ? "bg-surface-container-high text-on-surface font-semibold"
-                    : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+        {/* Liens centrés — desktop */}
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 md:flex">
+          {NAV_LINKS.map((link) => (
+            <a key={link.label} href={link.href} className="nav-link">
+              {link.label}
+            </a>
+          ))}
         </nav>
 
-        {/* Action CTAs */}
-        <div className="flex items-center gap-3">
+        {/* CTA + menu mobile */}
+        <div className="flex items-center gap-2">
           <a
-            className="hidden xl:flex items-center gap-2 px-3 py-2 bg-surface-container text-on-surface rounded-lg hover:bg-surface-container-high transition-colors font-label-sm text-label-sm tracking-wider uppercase border border-outline-variant/30"
-            href="https://wa.me/22870377743"
-            rel="noopener noreferrer"
-            target="_blank"
+            href="#contact"
+            className="btn btn-outline hidden sm:inline-flex"
           >
-            <span className="material-symbols-outlined text-[16px] text-secondary">
-              chat
-            </span>
-            <span>WhatsApp Direct</span>
+            Nous écrire
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </a>
-          <Link
-            className="inline-flex items-center justify-center px-4 sm:px-5 py-2.5 bg-secondary text-on-secondary rounded-lg font-label-md text-label-md uppercase tracking-wider hover:bg-primary transition-all duration-300 shadow-[0_4px_16px_-4px_rgba(124,87,48,0.3)] text-xs sm:text-sm"
-            href="/contact"
-          >
-            <span>Demander un devis</span>
-          </Link>
 
-          {/* Mobile hamburger menu toggle */}
           <button
             type="button"
-            className="lg:hidden p-2 rounded-lg text-primary hover:bg-surface-container-low transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Menu"
+            className="rounded-full p-2 text-foreground transition-colors hover:bg-surface-2 md:hidden"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={mobileMenuOpen}
           >
-            <span className="material-symbols-outlined text-2xl">
-              {mobileMenuOpen ? "close" : "menu"}
-            </span>
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" aria-hidden="true" />
+            ) : (
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Menu mobile */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-surface border-b border-outline-variant/30 px-6 py-6 flex flex-col gap-3 shadow-xl">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 px-4 font-label-md text-sm uppercase tracking-wider text-on-surface hover:bg-surface-container-low rounded-lg transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="mt-4 border-t border-hairline bg-background/97 px-5 pb-6 pt-4 backdrop-blur-xl md:hidden">
+          <nav className="flex flex-col">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="border-b border-hairline py-4 text-lg text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
           <a
-            className="mt-2 flex items-center justify-center gap-2 py-3 bg-secondary/10 text-secondary font-semibold rounded-lg text-sm uppercase tracking-wider"
-            href="https://wa.me/22870377743"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contact"
+            onClick={() => setMobileMenuOpen(false)}
+            className="btn btn-solid mt-6 w-full"
           >
-            <span className="material-symbols-outlined text-lg">chat</span>
-            <span>Échanger sur WhatsApp (+228 70 37 77 43)</span>
+            Nous écrire
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </div>
       )}
