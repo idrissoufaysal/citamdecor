@@ -63,6 +63,76 @@
   --spacing-space-8: 4rem;
 }
 
+/*
+ * ============================================================
+ *  Thème clair de section
+ * ============================================================
+ *  Le site est en clair par défaut (classe posée sur <html>).
+ *  Les utilitaires (bg-background, text-foreground, border-
+ *  hairline…) lisent ces variables. Le hero, lui, réapplique
+ *  la palette sombre via .theme-dark.
+ * ============================================================
+ */
+.theme-light {
+  color-scheme: light;
+
+  --color-background: #f4efe8;
+  --color-surface: #eae3d8;
+  --color-surface-2: #ded4c5;
+  --color-foreground: #15181a;
+  --color-muted-foreground: #5f584f;
+  --color-accent: #8a6135;
+  --color-hairline: rgba(21, 24, 26, 0.14);
+  --color-border: rgba(21, 24, 26, 0.45);
+
+  /* Alias shadcn/ui */
+  --color-primary: #15181a;
+  --color-primary-foreground: #f4efe8;
+  --color-secondary: #ded4c5;
+  --color-secondary-foreground: #15181a;
+  --color-muted: #eae3d8;
+  --color-accent-foreground: #f4efe8;
+  --color-card: #eae3d8;
+  --color-card-foreground: #15181a;
+  --color-popover: #eae3d8;
+  --color-popover-foreground: #15181a;
+  --color-input: rgba(21, 24, 26, 0.2);
+}
+
+/*
+ * ============================================================
+ *  Thème sombre de section — hero uniquement
+ * ============================================================
+ *  Rétablit la palette de design.md à l'intérieur d'une page
+ *  claire, sans dupliquer les composants.
+ * ============================================================
+ */
+.theme-dark {
+  color-scheme: dark;
+
+  --color-background: #0f1112;
+  --color-surface: #1a1c1d;
+  --color-surface-2: #242628;
+  --color-foreground: #e8e0d5;
+  --color-muted-foreground: #b5ada3;
+  --color-accent: #a57a4c;
+  --color-hairline: rgba(232, 224, 213, 0.14);
+  --color-border: rgba(232, 224, 213, 0.5);
+
+  /* Alias shadcn/ui */
+  --color-primary: #e8e0d5;
+  --color-primary-foreground: #0f1112;
+  --color-secondary: #242628;
+  --color-secondary-foreground: #e8e0d5;
+  --color-muted: #1a1c1d;
+  --color-accent-foreground: #0f1112;
+  --color-card: #1a1c1d;
+  --color-card-foreground: #e8e0d5;
+  --color-popover: #1a1c1d;
+  --color-popover-foreground: #e8e0d5;
+  --color-input: rgba(232, 224, 213, 0.2);
+}
+
 @layer base {
   * {
     @apply border-hairline;
@@ -230,7 +300,7 @@
   }
 
   .btn-outline:hover {
-    background: rgba(232, 224, 213, 0.08);
+    background: color-mix(in srgb, var(--color-foreground) 8%, transparent);
     border-color: var(--color-foreground);
   }
 

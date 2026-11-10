@@ -17,8 +17,6 @@ const SERVICES = [
     description:
       "Rénovation, réfection et personnalisation de vos fauteuils, canapés et sièges anciens. Nous restaurons le galbe et l'âme de chaque pièce.",
     items: ["Garnissage crin & mousse HR", "Passepoil & clouterie", "Tissus nobles"],
-    image: "/images/artisan-workshop.jpg",
-    alt: "Atelier de tapisserie d'ameublement à Lomé",
   },
   {
     index: "02",
@@ -26,8 +24,6 @@ const SERVICES = [
     description:
       "Des tentures et voilages conçus selon vos envies et les volumes de vos espaces, de la villa balnéaire aux résidences de maître.",
     items: ["Prise de cotes à domicile", "Tringles & rails encastrés", "Confection haute couture"],
-    image: "/images/drapery-curtains.jpg",
-    alt: "Rideaux sur mesure et voilages",
   },
   {
     index: "03",
@@ -35,8 +31,6 @@ const SERVICES = [
     description:
       "Nous concevons des intérieurs harmonieux, chaleureux et durables, de l'agencement mobilier à l'équilibre des palettes minérales et boisées.",
     items: ["Harmonisation colorimétrique", "Matières & textures", "Scénographie complète"],
-    image: "/images/hero-living-room.jpg",
-    alt: "Salon aménagé par C.I.TA.M DÉCOR",
   },
   {
     index: "04",
@@ -44,8 +38,6 @@ const SERVICES = [
     description:
       "Redonnez à l'intérieur de votre véhicule une allure d'exception : habillages sur mesure, cuirs sélectionnés et finitions sellier.",
     items: ["Cuir Nappa & Alcantara", "Volants & pavillons", "Surpiqûres piquées main"],
-    image: "/images/car-interior.jpg",
-    alt: "Sellerie automobile en cuir sur mesure",
   },
 ];
 
@@ -119,7 +111,10 @@ export default function Home() {
       <ArtVistaHero />
 
       {/* ═══════════ À PROPOS ═══════════ */}
-      <section id="a-propos" className="border-t border-hairline bg-background">
+      <section
+        id="a-propos"
+        className="theme-light border-t border-hairline bg-background"
+      >
         <div className="shell py-24 sm:py-32">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
@@ -171,8 +166,8 @@ export default function Home() {
           <div className="mt-16 grid gap-1 sm:grid-cols-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-surface-2">
               <Image
-                src="/images/artisan-workshop.jpg"
-                alt="Maître tapissier au travail dans l'atelier C.I.TA.M DÉCOR"
+                src="/images/portfolio/image.webp"
+                alt="Canapé trois places rhabillé en similicuir terracotta par l'atelier"
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 100vw, 50vw"
@@ -180,8 +175,8 @@ export default function Home() {
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-surface-2">
               <Image
-                src="/images/fabric-detail.jpg"
-                alt="Détail de tissus nobles et de finitions de l'atelier"
+                src="/images/portfolio/image copy 4.webp"
+                alt="Rideaux ivoire et voilages sur mesure posés dans un séjour"
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 100vw, 50vw"
@@ -208,47 +203,36 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-1 md:grid-cols-2">
+          <div className="mt-14 grid gap-px overflow-hidden rounded-card bg-hairline sm:grid-cols-2">
             {SERVICES.map((service) => (
               <article
                 key={service.index}
-                className="group relative flex min-h-[440px] flex-col overflow-hidden rounded-card bg-surface p-8 sm:min-h-[480px] sm:p-10"
+                className="flex flex-col bg-background p-8 transition-colors hover:bg-surface sm:p-10"
               >
-                {/* Image fondue en bas */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%]">
-                  <Image
-                    src={service.image}
-                    alt={service.alt}
-                    fill
-                    className="object-cover object-center opacity-70 transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface/10 via-surface/55 to-surface" />
-                </div>
-
-                <div className="relative z-10">
-                  <h3 className="card-title text-foreground">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                    {service.description}
-                  </p>
-                  <ul className="mt-5 flex flex-col gap-2 text-sm text-muted-foreground">
-                    {service.items.map((item) => (
-                      <li key={item} className="flex items-center gap-2">
-                        <span
-                          aria-hidden="true"
-                          className="h-1 w-1 rounded-full bg-accent"
-                        />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <span className="text-sm tracking-[0.2em] text-accent">
+                  {service.index}
+                </span>
+                <h3 className="card-title mt-4 text-foreground">
+                  {service.title}
+                </h3>
+                <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                  {service.description}
+                </p>
+                <ul className="mt-5 flex flex-col gap-2 text-sm text-muted-foreground">
+                  {service.items.map((item) => (
+                    <li key={item} className="flex items-center gap-2">
+                      <span
+                        aria-hidden="true"
+                        className="h-1 w-1 rounded-full bg-accent"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
 
                 <a
                   href="#contact"
-                  className="relative z-10 mt-auto inline-flex items-center gap-2 pt-10 text-sm text-foreground transition-colors hover:text-accent"
+                  className="mt-auto inline-flex items-center gap-2 pt-8 text-sm text-foreground transition-colors hover:text-accent"
                 >
                   Discuter de ce savoir-faire
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -260,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* ═══════════ PROCESSUS ═══════════ */}
-      <section className="border-t border-hairline bg-background">
+      <section className="theme-light border-t border-hairline bg-background">
         <div className="shell py-24 sm:py-32">
           <div className="grid gap-8 md:grid-cols-2 md:items-end">
             <div>
@@ -331,7 +315,7 @@ export default function Home() {
       <PortfolioSection />
 
       {/* ═══════════ TÉMOIGNAGES ═══════════ */}
-      <section className="border-t border-hairline bg-surface/40">
+      <section className="theme-light border-t border-hairline bg-surface">
         <div className="shell py-24 sm:py-32">
           <div className="max-w-2xl">
             <h2 className="display text-foreground">
@@ -339,7 +323,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="mt-14 grid gap-1 md:grid-cols-3">
+          <div className="mt-14 grid gap-1 lg:grid-cols-3">
             {TESTIMONIALS.map((testimonial) => (
               <figure
                 key={testimonial.author}
@@ -378,7 +362,7 @@ export default function Home() {
               </h2>
               <p className="body-lg mt-6 max-w-md text-muted-foreground">
                 Notre atelier d&apos;Agbalépédo vous accueille, et notre équipe se
-                déplace dans tout le Grand Lomé.
+                déplace dans tout le Togo.
               </p>
               <a
                 href="https://wa.me/22870377743?text=Bonjour%20C.I.TA.M%20D%C3%89COR%2C%20je%20souhaite%20un%20conseil."

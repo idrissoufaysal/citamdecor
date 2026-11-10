@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
@@ -27,30 +28,26 @@ export default function Navbar() {
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "border-b border-hairline bg-background/85 py-3 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent py-5 sm:py-6"
+          : "theme-dark border-b border-transparent bg-transparent py-5 sm:py-6"
       }`}
     >
       <div className="shell flex items-center justify-between gap-4">
         {/* Marque */}
-        <a href="#accueil" className="group flex shrink-0 items-center gap-3">
-          <span
-            aria-hidden="true"
-            className="text-lg leading-none text-foreground transition-colors group-hover:text-accent"
-          >
-            ◆
-          </span>
-          <span className="flex flex-col">
-            <span className="text-base font-medium tracking-tight text-foreground sm:text-lg">
-              C.I.TA.M DÉCOR
-            </span>
-            <span className="mt-0.5 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
-              Atelier d&apos;art • Lomé
-            </span>
-          </span>
+        <a href="#accueil" className="flex shrink-0 items-center">
+          <Image
+            src="/images/logo/image.png"
+            alt="C.I.TA.M DÉCOR — Tapisserie Moderne et Décoration"
+            width={743}
+            height={336}
+            priority
+            className={`h-11 w-auto transition-[filter] duration-300 sm:h-14 ${
+              isScrolled ? "invert" : ""
+            }`}
+          />
         </a>
 
         {/* Liens centrés — desktop */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 md:flex">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex xl:gap-9">
           {NAV_LINKS.map((link) => (
             <a key={link.label} href={link.href} className="nav-link">
               {link.label}
@@ -70,7 +67,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="rounded-full p-2 text-foreground transition-colors hover:bg-surface-2 md:hidden"
+            className="rounded-full p-2 text-foreground transition-colors hover:bg-surface-2 lg:hidden"
             onClick={() => setMobileMenuOpen((open) => !open)}
             aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={mobileMenuOpen}
@@ -86,7 +83,7 @@ export default function Navbar() {
 
       {/* Menu mobile */}
       {mobileMenuOpen && (
-        <div className="mt-4 border-t border-hairline bg-background/97 px-5 pb-6 pt-4 backdrop-blur-xl md:hidden">
+        <div className="mt-4 max-h-[calc(100svh-5rem)] overflow-y-auto border-t border-hairline bg-background/95 px-5 pb-6 pt-4 backdrop-blur-xl lg:hidden">
           <nav className="flex flex-col">
             {NAV_LINKS.map((link) => (
               <a

@@ -31,7 +31,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${inter.variable} h-full scroll-smooth`}>
+    <html
+      lang="fr"
+      className={`theme-light ${inter.variable} h-full scroll-smooth`}
+    >
       <head />
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <Navbar />

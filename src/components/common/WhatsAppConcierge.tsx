@@ -9,10 +9,7 @@ export default function WhatsAppConcierge() {
       aria-label="Écrire à C.I.TA.M DÉCOR sur WhatsApp"
       className="group fixed bottom-5 right-5 z-50 inline-flex items-center gap-3 rounded-pill border border-border bg-background/80 px-5 py-3 text-sm text-foreground backdrop-blur-md transition-colors hover:border-foreground hover:bg-surface sm:bottom-6 sm:right-6"
     >
-      <span className="relative flex h-2 w-2">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-70" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-      </span>
+    
       <MessageCircle className="h-4 w-4" aria-hidden="true" />
       <span className="hidden sm:inline">WhatsApp</span>
     </a>
