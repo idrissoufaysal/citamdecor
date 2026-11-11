@@ -350,6 +350,18 @@
   }
 }
 
+@layer utilities {
+  /* Rail horizontal du hero : masque la barre de défilement */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

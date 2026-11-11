@@ -31,7 +31,7 @@ const EXPERTISES = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-hairline bg-background">
+    <footer className="theme-dark border-t border-hairline bg-background text-foreground">
       <div className="shell py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Marque */}
@@ -41,7 +41,7 @@ export default function Footer() {
               alt="C.I.TA.M DÉCOR — Tapisserie Moderne et Décoration"
               width={743}
               height={336}
-              className="h-16 w-auto invert sm:h-20"
+              className="h-16 w-auto sm:h-20"
             />
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Centre International de Tapisserie Moderne — Décoration. Un atelier
@@ -75,7 +75,7 @@ export default function Footer() {
               {NAVIGATION.map((link) => (
                 <li key={link.label}>
                   <a
-                    className="transition-colors hover:text-foreground"
+                    className="inline-block transition-colors hover:text-foreground"
                     href={link.href}
                   >
                     {link.label}
@@ -92,7 +92,7 @@ export default function Footer() {
               {EXPERTISES.map((link) => (
                 <li key={link.label}>
                   <a
-                    className="transition-colors hover:text-foreground"
+                    className="inline-block transition-colors hover:text-foreground"
                     href={link.href}
                   >
                     {link.label}
@@ -108,13 +108,13 @@ export default function Footer() {
             <address className="mt-5 flex flex-col gap-3 text-sm leading-6 not-italic text-muted-foreground">
               <span>Agbalépédo, non loin de la station NAGODÉ, Lomé — Togo</span>
               <a
-                className="transition-colors hover:text-foreground"
+                className="inline-block transition-colors hover:text-foreground"
                 href="tel:+22870377743"
               >
                 +228 70 37 77 43
               </a>
               <a
-                className="transition-colors hover:text-foreground"
+                className="inline-block transition-colors hover:text-foreground"
                 href="tel:+22879202601"
               >
                 +228 79 20 26 01

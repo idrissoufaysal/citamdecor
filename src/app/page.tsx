@@ -166,7 +166,7 @@ export default function Home() {
           <div className="mt-16 grid gap-1 sm:grid-cols-2">
             <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-surface-2">
               <Image
-                src="/images/portfolio/image.webp"
+                src="/images/portfolio/portfolio-01.webp"
                 alt="Canapé trois places rhabillé en similicuir terracotta par l'atelier"
                 fill
                 className="object-cover"
@@ -175,7 +175,7 @@ export default function Home() {
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-surface-2">
               <Image
-                src="/images/portfolio/image copy 4.webp"
+                src="/images/portfolio/portfolio-05.webp"
                 alt="Rideaux ivoire et voilages sur mesure posés dans un séjour"
                 fill
                 className="object-cover"
